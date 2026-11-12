@@ -1,0 +1,962 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NextMakers Hub | Build What's Next</title>
+
+  <meta name="description" content="NextMakers Hub empowers students with practical technology skills, software development, robotics, communication and creativity.">
+  <meta name="theme-color" content="#0b1220">
+
+  <meta property="og:title" content="NextMakers Hub | Build What's Next">
+  <meta property="og:description" content="Learn technology, develop practical skills and build the future.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+      --font-display: "Space Grotesk", sans-serif;
+      --font-body: "DM Sans", sans-serif;
+
+      --color-brand: #1688F8;
+      --color-ink: #0B1220;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    h1, h2, h3, .display {
+      font-family: var(--font-display);
+    }
+
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+    }
+
+    .blue-glow {
+      background: radial-gradient(
+        circle,
+        rgba(22,136,248,.25),
+        transparent 70%
+      );
+    }
+
+    .glass {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(14px);
+    }
+
+    .card-hover {
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(15,23,42,.08);
+      border-color: #93c5fd;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .faq-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .3s ease;
+    }
+
+    .faq-answer.open {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer > div {
+      overflow: hidden;
+    }
+
+    .faq-icon {
+      transition: transform .3s ease;
+    }
+
+    .faq-icon.rotate {
+      transform: rotate(45deg);
+    }
+
+    ::selection {
+      background: #1688F8;
+      color: white;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- NAVIGATION -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/70">
+    <nav class="max-w-7xl mx-auto px-5 lg:px-8 h-20 flex items-center justify-between">
+
+      <a href="#home" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white">
+          <i data-lucide="rocket" class="w-5 h-5"></i>
+        </div>
+
+        <div>
+          <span class="block font-bold text-lg display leading-tight">
+            NextMakers<span class="text-blue-600">.</span>
+          </span>
+          <span class="block text-[10px] text-slate-500 tracking-[.2em] uppercase">
+            Hub
+          </span>
+        </div>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-600">
+        <a href="#about" class="hover:text-blue-600 transition">About</a>
+        <a href="#programs" class="hover:text-blue-600 transition">What You'll Learn</a>
+        <a href="#benefits" class="hover:text-blue-600 transition">Benefits</a>
+        <a href="#approach" class="hover:text-blue-600 transition">Our Approach</a>
+        <a href="#faq" class="hover:text-blue-600 transition">FAQ</a>
+      </div>
+
+      <a href="#contact" class="hidden lg:flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl text-sm font-semibold transition">
+        Get Involved
+        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+      </a>
+
+      <button id="menuBtn" class="lg:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Open navigation" aria-expanded="false">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-slate-100 px-5 py-5">
+      <div class="flex flex-col gap-5 text-sm font-medium text-slate-700">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#programs" class="mobile-link">What You'll Learn</a>
+        <a href="#benefits" class="mobile-link">Benefits</a>
+        <a href="#approach" class="mobile-link">Our Approach</a>
+        <a href="#faq" class="mobile-link">FAQ</a>
+        <a href="#contact" class="mobile-link text-blue-600">Get Involved →</a>
+      </div>
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- HERO -->
+    <section id="home" class="relative overflow-hidden bg-[#0B1220] text-white pt-36 pb-24 lg:pt-48 lg:pb-36">
+
+      <div class="absolute inset-0 hero-grid opacity-60"></div>
+      <div class="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full blue-glow"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 blue-glow"></div>
+
+      <div class="relative max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+
+        <div class="reveal">
+          <div class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full text-blue-300 text-xs font-semibold mb-8">
+            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+            LEARN. CREATE. INNOVATE.
+          </div>
+
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight">
+            Don't just imagine the future.
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+              Build it.
+            </span>
+          </h1>
+
+          <p class="text-slate-400 text-base sm:text-lg leading-8 mt-7 max-w-xl">
+            Welcome to NextMakers Hub — a space where students explore technology, develop practical skills, discover their creativity and gain the confidence to turn ideas into reality.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mt-9">
+            <a href="#programs" class="bg-blue-600 hover:bg-blue-500 text-white px-7 py-4 rounded-xl font-semibold flex items-center gap-2 transition">
+              Explore the Program
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </a>
+
+            <a href="#about" class="glass hover:bg-white/10 px-7 py-4 rounded-xl font-semibold transition">
+              Discover More
+            </a>
+          </div>
+
+          <div class="mt-12 flex flex-wrap gap-7 text-sm text-slate-400">
+            <span class="flex items-center gap-2">
+              <i data-lucide="check-circle" class="w-4 h-4 text-blue-400"></i>
+              Practical learning
+            </span>
+            <span class="flex items-center gap-2">
+              <i data-lucide="check-circle" class="w-4 h-4 text-blue-400"></i>
+              Creative thinking
+            </span>
+          </div>
+        </div>
+
+        <!-- HERO VISUAL -->
+        <div class="relative reveal">
+          <div class="absolute inset-0 blue-glow"></div>
+
+          <div class="relative glass rounded-3xl p-5 sm:p-8 shadow-2xl">
+
+            <div class="flex justify-between items-center mb-8">
+              <div>
+                <p class="text-slate-400 text-xs uppercase tracking-widest">The Next Generation</p>
+                <h3 class="text-xl font-bold mt-1">Ideas in Motion.</h3>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                <i data-lucide="cpu" class="text-blue-400"></i>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+
+              <div class="bg-[#17253A] rounded-2xl p-5">
+                <i data-lucide="bot" class="w-8 h-8 text-cyan-400 mb-6"></i>
+                <h4 class="font-semibold">Robotics</h4>
+                <p class="text-xs text-slate-400 mt-2">Build and experiment.</p>
+              </div>
+
+              <div class="bg-[#17253A] rounded-2xl p-5">
+                <i data-lucide="code-2" class="w-8 h-8 text-blue-400 mb-6"></i>
+                <h4 class="font-semibold">Coding</h4>
+                <p class="text-xs text-slate-400 mt-2">Create digital solutions.</p>
+              </div>
+
+              <div class="bg-[#17253A] rounded-2xl p-5">
+                <i data-lucide="mic" class="w-8 h-8 text-violet-400 mb-6"></i>
+                <h4 class="font-semibold">Confidence</h4>
+                <p class="text-xs text-slate-400 mt-2">Express your ideas.</p>
+              </div>
+
+              <div class="bg-[#17253A] rounded-2xl p-5">
+                <i data-lucide="lightbulb" class="w-8 h-8 text-amber-400 mb-6"></i>
+                <h4 class="font-semibold">Innovation</h4>
+                <p class="text-xs text-slate-400 mt-2">Think beyond limits.</p>
+              </div>
+
+            </div>
+
+            <div class="mt-5 bg-blue-500/10 border border-blue-400/20 rounded-xl p-4 flex items-center gap-3">
+              <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                <i data-lucide="sparkles" class="text-blue-300"></i>
+              </div>
+              <div>
+                <p class="text-sm font-semibold">Your ideas matter.</p>
+                <p class="text-xs text-slate-400 mt-1">Your journey starts with curiosity.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- INTRO STRIP -->
+    <section class="bg-blue-600 text-white py-7">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8 flex flex-wrap justify-center sm:justify-between gap-5 text-sm font-semibold">
+        <span>Technology</span>
+        <span class="text-blue-200">✦</span>
+        <span>Creativity</span>
+        <span class="text-blue-200">✦</span>
+        <span>Communication</span>
+        <span class="text-blue-200">✦</span>
+        <span>Innovation</span>
+        <span class="text-blue-200">✦</span>
+        <span>Growth</span>
+      </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+
+        <div class="reveal">
+          <span class="text-blue-600 text-xs font-bold tracking-[.2em] uppercase">01 / About Us</span>
+
+          <h2 class="text-4xl sm:text-5xl font-bold tracking-tight mt-5 leading-tight">
+            More than learning.
+            <span class="text-blue-600">It's about becoming.</span>
+          </h2>
+
+          <p class="text-slate-500 leading-8 mt-7">
+            NextMakers Hub is designed to give students opportunities to explore different areas of technology, develop useful life skills and discover what they are capable of achieving.
+          </p>
+
+          <p class="text-slate-500 leading-8 mt-4">
+            We believe learning becomes more meaningful when students can experiment, ask questions, collaborate and apply what they learn to real-world challenges.
+          </p>
+
+          <a href="#programs" class="inline-flex items-center gap-2 text-blue-600 font-semibold mt-8 hover:gap-4 transition-all">
+            Explore learning areas
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 reveal">
+
+          <div class="bg-blue-50 rounded-3xl p-6 sm:p-8">
+            <i data-lucide="brain-circuit" class="w-9 h-9 text-blue-600"></i>
+            <h3 class="font-bold text-lg mt-6">Think</h3>
+            <p class="text-sm text-slate-500 mt-2 leading-6">Develop curiosity and logical thinking.</p>
+          </div>
+
+          <div class="bg-indigo-50 rounded-3xl p-6 sm:p-8 mt-10">
+            <i data-lucide="hammer" class="w-9 h-9 text-indigo-600"></i>
+            <h3 class="font-bold text-lg mt-6">Build</h3>
+            <p class="text-sm text-slate-500 mt-2 leading-6">Turn knowledge into practical projects.</p>
+          </div>
+
+          <div class="bg-cyan-50 rounded-3xl p-6 sm:p-8">
+            <i data-lucide="users" class="w-9 h-9 text-cyan-600"></i>
+            <h3 class="font-bold text-lg mt-6">Connect</h3>
+            <p class="text-sm text-slate-500 mt-2 leading-6">Learn teamwork and communication.</p>
+          </div>
+
+          <div class="bg-sky-50 rounded-3xl p-6 sm:p-8 mt-10">
+            <i data-lucide="trending-up" class="w-9 h-9 text-sky-600"></i>
+            <h3 class="font-bold text-lg mt-6">Grow</h3>
+            <p class="text-sm text-slate-500 mt-2 leading-6">Build confidence and new abilities.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- LEARNING AREAS -->
+    <section id="programs" class="bg-[#0B1220] text-white py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="max-w-2xl mx-auto text-center reveal">
+          <span class="text-blue-400 text-xs font-bold tracking-[.2em] uppercase">02 / Learning Areas</span>
+
+          <h2 class="text-4xl sm:text-5xl font-bold mt-5">
+            Skills that open
+            <span class="text-blue-400">new possibilities.</span>
+          </h2>
+
+          <p class="text-slate-400 mt-6 leading-8">
+            Students will explore different areas of learning, gaining exposure to technology, communication and personal development.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-16">
+
+          <!-- CARD 1 -->
+          <article class="glass rounded-3xl p-7 card-hover reveal">
+            <div class="w-14 h-14 rounded-2xl bg-blue-500/15 flex items-center justify-center text-blue-400">
+              <i data-lucide="cpu" class="w-7 h-7"></i>
+            </div>
+
+            <span class="text-xs text-blue-400 font-semibold mt-7 block">01 / HARDWARE & AUTOMATION</span>
+
+            <h3 class="text-2xl font-bold mt-3">Arduino & Robotics</h3>
+
+            <p class="text-slate-400 text-sm leading-7 mt-4">
+              Discover how hardware and software work together. Learn Arduino programming, explore automatic systems and develop practical projects.
+            </p>
+
+            <ul class="mt-6 space-y-3 text-sm text-slate-300">
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-400"></i> Arduino programming</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-400"></i> Automated systems</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-400"></i> Project development</li>
+            </ul>
+          </article>
+
+          <!-- CARD 2 -->
+          <article class="glass rounded-3xl p-7 card-hover reveal">
+            <div class="w-14 h-14 rounded-2xl bg-cyan-500/15 flex items-center justify-center text-cyan-400">
+              <i data-lucide="code-2" class="w-7 h-7"></i>
+            </div>
+
+            <span class="text-xs text-cyan-400 font-semibold mt-7 block">02 / DIGITAL CREATION</span>
+
+            <h3 class="text-2xl font-bold mt-3">Software Development</h3>
+
+            <p class="text-slate-400 text-sm leading-7 mt-4">
+              Discover how software is created and learn to turn ideas into digital experiences through web and application development.
+            </p>
+
+            <ul class="mt-6 space-y-3 text-sm text-slate-300">
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-400"></i> Web development</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-400"></i> App development</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-400"></i> Building digital solutions</li>
+            </ul>
+          </article>
+
+          <!-- CARD 3 -->
+          <article class="glass rounded-3xl p-7 card-hover reveal">
+            <div class="w-14 h-14 rounded-2xl bg-violet-500/15 flex items-center justify-center text-violet-400">
+              <i data-lucide="mic" class="w-7 h-7"></i>
+            </div>
+
+            <span class="text-xs text-violet-400 font-semibold mt-7 block">03 / PERSONAL EXPRESSION</span>
+
+            <h3 class="text-2xl font-bold mt-3">Public Speaking</h3>
+
+            <p class="text-slate-400 text-sm leading-7 mt-4">
+              Learn how to communicate clearly, express ideas, speak confidently and present your work to others.
+            </p>
+
+            <ul class="mt-6 space-y-3 text-sm text-slate-300">
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-violet-400"></i> Speaking with confidence</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-violet-400"></i> Presentation skills</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-violet-400"></i> Effective communication</li>
+            </ul>
+          </article>
+
+          <!-- CARD 4 -->
+          <article class="glass rounded-3xl p-7 card-hover reveal">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 flex items-center justify-center text-emerald-400">
+              <i data-lucide="monitor-smartphone" class="w-7 h-7"></i>
+            </div>
+
+            <span class="text-xs text-emerald-400 font-semibold mt-7 block">04 / TECHNOLOGY AWARENESS</span>
+
+            <h3 class="text-2xl font-bold mt-3">Digital Skills</h3>
+
+            <p class="text-slate-400 text-sm leading-7 mt-4">
+              Explore useful digital tools, technologies and resources that can improve how you learn, work and solve problems.
+            </p>
+
+            <ul class="mt-6 space-y-3 text-sm text-slate-300">
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Digital literacy</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Technology exploration</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Digital productivity</li>
+            </ul>
+          </article>
+
+          <!-- CARD 5 -->
+          <article class="glass rounded-3xl p-7 card-hover reveal sm:col-span-2 lg:col-span-1">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/15 flex items-center justify-center text-amber-400">
+              <i data-lucide="users" class="w-7 h-7"></i>
+            </div>
+
+            <span class="text-xs text-amber-400 font-semibold mt-7 block">05 / PERSONAL GROWTH</span>
+
+            <h3 class="text-2xl font-bold mt-3">Soft Skills</h3>
+
+            <p class="text-slate-400 text-sm leading-7 mt-4">
+              Develop important personal and interpersonal abilities that help you work with others and navigate everyday challenges.
+            </p>
+
+            <ul class="mt-6 space-y-3 text-sm text-slate-300">
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400"></i> Teamwork</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400"></i> Critical thinking</li>
+              <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-400"></i> Creativity & adaptability</li>
+            </ul>
+          </article>
+
+          <!-- EXTRA -->
+          <article class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-7 card-hover reveal flex flex-col justify-between">
+            <div>
+              <div class="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center">
+                <i data-lucide="sparkles" class="w-7 h-7"></i>
+              </div>
+
+              <span class="text-xs text-blue-100 font-semibold mt-7 block">AND MUCH MORE</span>
+
+              <h3 class="text-2xl font-bold mt-3">Beyond the Basics</h3>
+
+              <p class="text-blue-100 text-sm leading-7 mt-4">
+                Learning doesn't stop at these areas. Students will have opportunities to explore additional skills and ideas depending on available resources and learning opportunities.
+              </p>
+            </div>
+
+            <div class="mt-8 flex items-center gap-2 text-sm font-semibold">
+              Stay curious. Keep exploring.
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- BENEFITS -->
+    <section id="benefits" class="py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="max-w-2xl reveal">
+          <span class="text-blue-600 text-xs font-bold tracking-[.2em] uppercase">03 / Why It Matters</span>
+
+          <h2 class="text-4xl sm:text-5xl font-bold mt-5 leading-tight">
+            Skills today.
+            <span class="text-blue-600">Opportunities tomorrow.</span>
+          </h2>
+
+          <p class="text-slate-500 mt-6 leading-8">
+            The right learning experiences can help students discover their strengths and prepare for opportunities in an increasingly digital world.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-7 card-hover reveal">
+            <i data-lucide="briefcase-business" class="w-8 h-8 text-blue-600"></i>
+            <h3 class="font-bold text-xl mt-6">Career Awareness</h3>
+            <p class="text-slate-500 text-sm leading-7 mt-3">
+              Discover different career paths in technology and understand how various skills connect to real-world opportunities.
+            </p>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-7 card-hover reveal">
+            <i data-lucide="wrench" class="w-8 h-8 text-blue-600"></i>
+            <h3 class="font-bold text-xl mt-6">Practical Experience</h3>
+            <p class="text-slate-500 text-sm leading-7 mt-3">
+              Apply what you learn through experiments, projects and hands-on activities.
+            </p>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-7 card-hover reveal">
+            <i data-lucide="brain" class="w-8 h-8 text-blue-600"></i>
+            <h3 class="font-bold text-xl mt-6">Better Problem-Solving</h3>
+            <p class="text-slate-500 text-sm leading-7 mt-3">
+              Learn to approach challenges logically, explore possibilities and develop solutions.
+            </p>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-7 card-hover reveal">
+            <i data-lucide="message-circle" class="w-8 h-8 text-blue-600"></i>
+            <h3 class="font-bold text-xl mt-6">Communication</h3>
+            <p class="text-slate-500 text-sm leading-7 mt-3">
+              Become better at sharing ideas, collaborating with others and expressing yourself.
+            </p>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-7 card-hover reveal">
+            <i data-lucide="rocket" class="w-8 h-8 text-blue-600"></i>
+            <h3 class="font-bold text-xl mt-6">Creativity & Innovation</h3>
+            <p class="text-slate-500 text-sm leading-7 mt-3">
+              Develop the confidence to experiment, explore new ideas and create useful things.
+            </p>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-7 card-hover reveal">
+            <i data-lucide="graduation-cap" class="w-8 h-8 text-blue-600"></i>
+            <h3 class="font-bold text-xl mt-6">Future Readiness</h3>
+            <p class="text-slate-500 text-sm leading-7 mt-3">
+              Build foundational knowledge and transferable skills that can support further learning and personal growth.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- LEARNING APPROACH -->
+    <section id="approach" class="bg-blue-50 py-24 lg:py-32">
+      <div class="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+
+        <div class="reveal">
+          <span class="text-blue-600 text-xs font-bold tracking-[.2em] uppercase">04 / Our Approach</span>
+
+          <h2 class="text-4xl sm:text-5xl font-bold mt-5 leading-tight">
+            Learn by doing.
+            <span class="text-blue-600">Grow by exploring.</span>
+          </h2>
+
+          <p class="text-slate-500 leading-8 mt-6">
+            We believe students should have the opportunity to experience learning beyond textbooks. That's why the program places emphasis on practical exploration, experimentation and participation.
+          </p>
+
+          <p class="text-slate-500 leading-8 mt-4">
+            Learning activities and digital experiences will depend partly on the materials and resources available. However, available resources will not define the limits of curiosity, creativity or the learning process.
+          </p>
+        </div>
+
+        <div class="space-y-5 reveal">
+
+          <div class="bg-white rounded-2xl p-6 flex gap-5 items-start shadow-sm">
+            <div class="w-12 h-12 shrink-0 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
+              <i data-lucide="search" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg">Explore</h3>
+              <p class="text-sm text-slate-500 leading-6 mt-2">Discover new concepts, tools and possibilities through guided learning.</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 flex gap-5 items-start shadow-sm">
+            <div class="w-12 h-12 shrink-0 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
+              <i data-lucide="code" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg">Experiment</h3>
+              <p class="text-sm text-slate-500 leading-6 mt-2">Try new things, test ideas and learn through practical activities.</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 flex gap-5 items-start shadow-sm">
+            <div class="w-12 h-12 shrink-0 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
+              <i data-lucide="hammer" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg">Create</h3>
+              <p class="text-sm text-slate-500 leading-6 mt-2">Use your knowledge to develop projects and meaningful solutions.</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 flex gap-5 items-start shadow-sm">
+            <div class="w-12 h-12 shrink-0 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
+              <i data-lucide="presentation" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg">Share</h3>
+              <p class="text-sm text-slate-500 leading-6 mt-2">Present your ideas, collaborate and learn from one another.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- BIG CTA -->
+    <section class="bg-[#0B1220] py-24 text-white relative overflow-hidden">
+      <div class="absolute -right-20 -top-20 w-96 h-96 blue-glow"></div>
+
+      <div class="relative max-w-4xl mx-auto px-5 text-center reveal">
+
+        <span class="text-blue-400 text-xs font-bold tracking-[.2em] uppercase">
+          YOUR NEXT CHAPTER STARTS HERE
+        </span>
+
+        <h2 class="text-4xl sm:text-6xl font-bold mt-6 leading-tight">
+          The future needs
+          <span class="text-blue-400">makers.</span>
+        </h2>
+
+        <p class="text-slate-400 text-base sm:text-lg leading-8 mt-6 max-w-2xl mx-auto">
+          You don't need to know everything to get started. All you need is curiosity, a willingness to learn and the courage to explore something new.
+        </p>
+
+        <a href="#contact" class="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-semibold mt-9 transition">
+          Take the Next Step
+          <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+        </a>
+
+      </div>
+    </section>
+
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 lg:py-32">
+      <div class="max-w-3xl mx-auto px-5 lg:px-8">
+
+        <div class="text-center reveal">
+          <span class="text-blue-600 text-xs font-bold tracking-[.2em] uppercase">05 / FAQ</span>
+          <h2 class="text-4xl sm:text-5xl font-bold mt-5">Questions? We've got you.</h2>
+          <p class="text-slate-500 mt-5">A few things you might want to know about the program.</p>
+        </div>
+
+        <div class="mt-12 space-y-4">
+
+          <div class="border border-slate-200 rounded-2xl p-6 reveal">
+            <button class="faq-btn w-full flex justify-between items-center text-left gap-4" aria-expanded="false">
+              <span class="font-bold">What is NextMakers Hub?</span>
+              <i data-lucide="plus" class="faq-icon w-5 h-5 shrink-0 text-blue-600"></i>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p class="text-slate-500 text-sm leading-7 pt-4">
+                  NextMakers Hub is a learning initiative designed to introduce students to technology, practical project development, communication and other important life skills.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-slate-200 rounded-2xl p-6 reveal">
+            <button class="faq-btn w-full flex justify-between items-center text-left gap-4" aria-expanded="false">
+              <span class="font-bold">Do I need previous programming experience?</span>
+              <i data-lucide="plus" class="faq-icon w-5 h-5 shrink-0 text-blue-600"></i>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p class="text-slate-500 text-sm leading-7 pt-4">
+                  The program introduces students to different learning areas. Specific entry requirements and experience expectations should be confirmed with the program organizers.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-slate-200 rounded-2xl p-6 reveal">
+            <button class="faq-btn w-full flex justify-between items-center text-left gap-4" aria-expanded="false">
+              <span class="font-bold">Will students build actual projects?</span>
+              <i data-lucide="plus" class="faq-icon w-5 h-5 shrink-0 text-blue-600"></i>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p class="text-slate-500 text-sm leading-7 pt-4">
+                  Yes. Project development is part of the learning areas, particularly Arduino programming, automatic systems and software development.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-slate-200 rounded-2xl p-6 reveal">
+            <button class="faq-btn w-full flex justify-between items-center text-left gap-4" aria-expanded="false">
+              <span class="font-bold">What if some learning materials are unavailable?</span>
+              <i data-lucide="plus" class="faq-icon w-5 h-5 shrink-0 text-blue-600"></i>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p class="text-slate-500 text-sm leading-7 pt-4">
+                  Some activities will depend on available materials. However, this will not prevent students from exploring concepts and continuing the learning process through other available approaches.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-slate-200 rounded-2xl p-6 reveal">
+            <button class="faq-btn w-full flex justify-between items-center text-left gap-4" aria-expanded="false">
+              <span class="font-bold">What other skills can students develop?</span>
+              <i data-lucide="plus" class="faq-icon w-5 h-5 shrink-0 text-blue-600"></i>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p class="text-slate-500 text-sm leading-7 pt-4">
+                  Students can also explore teamwork, critical thinking, creativity, adaptability, communication and other transferable skills.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="bg-blue-50 py-24">
+      <div class="max-w-5xl mx-auto px-5 lg:px-8">
+
+        <div class="bg-white border border-blue-100 rounded-3xl p-8 sm:p-14 text-center shadow-sm reveal">
+
+          <div class="w-16 h-16 bg-blue-100 rounded-2xl mx-auto flex items-center justify-center text-blue-600">
+            <i data-lucide="send" class="w-7 h-7"></i>
+          </div>
+
+          <span class="text-blue-600 text-xs font-bold tracking-[.2em] uppercase block mt-7">
+            LET'S GET STARTED
+          </span>
+
+          <h2 class="text-4xl sm:text-5xl font-bold mt-5">
+            Ready to explore what's possible?
+          </h2>
+
+          <p class="text-slate-500 leading-8 max-w-2xl mx-auto mt-6">
+            Whether you're curious about technology, interested in building projects or looking to develop new skills, NextMakers Hub is an opportunity to take that first step.
+          </p>
+
+          <div class="mt-9 flex flex-wrap justify-center gap-4">
+            <a href="#programs" class="bg-blue-600 hover:bg-blue-700 text-white px-7 py-4 rounded-xl font-semibold transition">
+              Explore Learning Areas
+            </a>
+
+            <a href="#home" class="border border-slate-200 hover:border-blue-400 px-7 py-4 rounded-xl font-semibold transition">
+              Back to Top ↑
+            </a>
+          </div>
+
+          <p class="text-xs text-slate-400 mt-8">
+            For participation details, contact the NextMakers Hub program organizers.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="bg-[#0B1220] text-white pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+      <div class="grid md:grid-cols-2 gap-12 pb-12">
+
+        <div>
+          <a href="#home" class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
+              <i data-lucide="rocket" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xl font-bold display">NextMakers Hub</span>
+          </a>
+
+          <p class="text-slate-400 text-sm leading-7 mt-5 max-w-md">
+            Empowering students to explore technology, develop practical skills and build confidence for the opportunities ahead.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+          <div>
+            <h4 class="font-bold mb-5">Explore</h4>
+            <div class="space-y-3 text-sm text-slate-400 flex flex-col">
+              <a href="#about" class="hover:text-blue-400">About Us</a>
+              <a href="#programs" class="hover:text-blue-400">Learning Areas</a>
+              <a href="#benefits" class="hover:text-blue-400">Benefits</a>
+              <a href="#approach" class="hover:text-blue-400">Our Approach</a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-bold mb-5">More</h4>
+            <div class="space-y-3 text-sm text-slate-400 flex flex-col">
+              <a href="#faq" class="hover:text-blue-400">FAQ</a>
+              <a href="#contact" class="hover:text-blue-400">Get Involved</a>
+              <a href="#home" class="hover:text-blue-400">Back to Home</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-800 pt-7 flex flex-col sm:flex-row justify-between gap-4 text-xs text-slate-500">
+        <p>© <span id="year"></span> NextMakers Hub. All rights reserved.</p>
+        <p>Learn Today. Build Tomorrow.</p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Mobile navigation
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = !mobileMenu.classList.contains("hidden");
+
+      mobileMenu.classList.toggle("hidden");
+
+      menuBtn.setAttribute("aria-expanded", String(!isOpen));
+
+      menuBtn.innerHTML = isOpen
+        ? '<i data-lucide="menu" class="w-6 h-6"></i>'
+        : '<i data-lucide="x" class="w-6 h-6"></i>';
+
+      menuBtn.setAttribute(
+        "aria-label",
+        isOpen ? "Open navigation" : "Close navigation"
+      );
+
+      lucide.createIcons();
+    });
+
+    // Close mobile menu after navigation
+    document.querySelectorAll(".mobile-link").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.setAttribute("aria-label", "Open navigation");
+        menuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+        lucide.createIcons();
+      });
+    });
+
+    // FAQ accordion
+    document.querySelectorAll(".faq-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const answer = button.nextElementSibling;
+        const icon = button.querySelector(".faq-icon");
+        const isOpen = answer.classList.contains("open");
+
+        // Close all FAQ answers
+        document.querySelectorAll(".faq-answer").forEach(item => {
+          item.classList.remove("open");
+        });
+
+        document.querySelectorAll(".faq-icon").forEach(item => {
+          item.classList.remove("rotate");
+        });
+
+        document.querySelectorAll(".faq-btn").forEach(item => {
+          item.setAttribute("aria-expanded", "false");
+        });
+
+        // Open selected answer
+        if (!isOpen) {
+          answer.classList.add("open");
+          icon.classList.add("rotate");
+          button.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+
+    // Scroll reveal animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    document.querySelectorAll(".reveal").forEach(element => {
+      observer.observe(element);
+    });
+
+    // Automatic copyright year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>
